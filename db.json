@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Cable de Cobre",
+      "description": "Cable de alta calidad",
+      "image": "https://dojiw2m9tvv09.cloudfront.net/44838/product/3391873978.jpg",
+      "category": "Cables"
+    },
+    {
+      "id": 2,
+      "name": "Lámpara LED",
+      "description": "Bajo consumo, alta duración",
+      "image": "https://www.zgsm-streetlighting.com/uploads/201914544/tunnel-led-lamp-with-ce-rohs15086267698.png",
+      "category": "Iluminación"
+    },
+    {
+      "id": 3,
+      "name": "Destornillador",
+      "description": "Herramienta ergonómica",
+      "image": "https://construmartcl.vtexassets.com/arquivos/ids/230441-800-auto?v=638811980566570000&width=800&height=auto&aspect=true",
+      "category": "Herramientas"
+    }
+  ]
+}
