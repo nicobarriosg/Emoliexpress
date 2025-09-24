@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Emoliexpress/static/css/main.402403bf.css",
+    "main.js": "/Emoliexpress/static/js/main.ac5f9e0a.js",
+    "static/js/453.1b969ba9.chunk.js": "/Emoliexpress/static/js/453.1b969ba9.chunk.js",
+    "static/media/banner.gif": "/Emoliexpress/static/media/banner.16fad59d309b5c9b805f.gif",
+    "static/media/logo.png": "/Emoliexpress/static/media/logo.35cdc2655cb69e783d65.png",
+    "index.html": "/Emoliexpress/index.html",
+    "main.402403bf.css.map": "/Emoliexpress/static/css/main.402403bf.css.map",
+    "main.ac5f9e0a.js.map": "/Emoliexpress/static/js/main.ac5f9e0a.js.map",
+    "453.1b969ba9.chunk.js.map": "/Emoliexpress/static/js/453.1b969ba9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.402403bf.css",
+    "static/js/main.ac5f9e0a.js"
+  ]
+}
