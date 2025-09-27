@@ -63,7 +63,7 @@ button:hover {
 
 .navbar-search button {
   border: none;
-  background: orange;
+  background: #FF6B00;
   color: white;
   border-radius: 50%;
   padding: 6px;
@@ -374,16 +374,51 @@ button:hover {
    ABOUT
 ======================= */
 .about {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
+  padding: 60px 20px;
+  background: #fff;
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  flex-wrap: wrap; /* se adapta en pantallas pequeñas */
+}
+
+.about-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #FF6B00; /* naranja corporativo */
+}
+
+.about-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
   text-align: center;
 }
 
-.about span {
-  color: #FF6B00;
-  font-weight: bold;
+.about-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
+
 
 /* =======================
    FOOTER
