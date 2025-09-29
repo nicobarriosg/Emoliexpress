@@ -158,7 +158,9 @@ button:hover {
 /* =======================
    CATEGORÍAS
 ======================= */
-/* Categorías */
+/* =======================
+   CATEGORÍAS
+======================= */
 .categories {
   text-align: center;
   padding: 50px 20px;
@@ -226,8 +228,11 @@ button:hover {
 
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px; /* suficiente espacio debajo para la paginación */
+  align-items: start; /* importante para que las filas no se estiren */
 }
 
 .product-card {
@@ -237,16 +242,22 @@ button:hover {
   padding: 16px;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* quitar height: 100% */
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.product-card p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+  flex-grow: 0; /* quitar flex-grow para que no estire innecesariamente */
 }
 
 .product-card img {
   max-width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: contain;
   margin-bottom: 12px;
 }
@@ -260,13 +271,28 @@ button:hover {
   font-size: 14px;
   color: #555;
   margin-bottom: 12px;
+  flex-grow: 1; /* hace que la descripción empuje el botón hacia abajo */
 }
 
 .product-card button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  justify-content: center;
+  background: #FF6B00;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
 }
+
+.product-card button:hover {
+  background: #e65a00;
+}
+
 
 /* =======================
    CART
@@ -492,3 +518,188 @@ button:hover {
 }
 
 
+/* =======================
+   PROVIDERS / CARRUSEL
+======================= */
+.providers {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fafafa;
+  overflow: hidden; /* evita scroll horizontal */
+}
+
+.providers h2 {
+  color: #FF6B00;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+/* carrusel principal: contiene 2 pistas idénticas */
+.carousel {
+  display: flex;
+  overflow: hidden; /* esto recorta el exceso */
+}
+
+.carousel-track {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  animation: scroll 40s linear infinite;
+}
+
+/* item */
+.carousel-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+
+.carousel-item img {
+  height: 60px;
+  max-width: 180px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.95;
+  transition: filter 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+}
+
+.carousel-item img:hover {
+  filter: none;
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* pausar al hover */
+.carousel:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+/* animación infinita */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .carousel-item {
+    min-width: 120px;
+  }
+  .carousel-item img {
+    height: 48px;
+  }
+  .providers h2 {
+    font-size: 1.25rem;
+  }
+}
+
+
+/* =======================
+   CONTACT SECTION
+======================= */
+.contact-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 60px 40px;
+  background: #f9f9f9;
+  gap: 40px;
+}
+
+.contact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.contact-info h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #ff6600; /* naranja corporativo */
+}
+
+.contact-info p {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #333;
+}
+
+.contact-info strong {
+  color: #222;
+}
+
+.contact-map {
+  flex: 1.5;
+  min-height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .contact-section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .contact-map {
+    min-height: 250px;
+  }
+}
+
+/* paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0 80px 0;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  background: #f4f4f4; /* gris claro */
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 36px; /* tamaño consistente */
+}
+
+.pagination button:hover {
+  background: #FF6B00;
+  color: white;
+  border-color: #FF6B00;
+  transform: translateY(-2px);
+}
+
+.pagination button.active {
+  background: #FF6B00;
+  color: white;
+  border-color: #FF6B00;
+  font-weight: bold;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background: #eee;
+  color: #999;
+}

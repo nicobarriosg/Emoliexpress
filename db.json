@@ -20,6 +20,79 @@
       "description": "Herramienta ergonómica",
       "image": "https://construmartcl.vtexassets.com/arquivos/ids/230441-800-auto?v=638811980566570000&width=800&height=auto&aspect=true",
       "category": "Herramientas"
+    },
+    {
+      "id": 4,
+      "name": "Cable de Alimentación",
+      "description": "Cable para uso eléctrico general",
+      "image": "https://images.pexels.com/photos/256234/pexels-photo-256234.jpeg",
+      "category": "Cables"
+    },
+    {
+      "id": 5,
+      "name": "Lámpara LED de Techo",
+      "description": "Eficiente y de larga duración",
+      "image": "https://images.pexels.com/photos/279719/pexels-photo-279719.jpeg",
+      "category": "Iluminación"
+    },
+    {
+      "id": 6,
+      "name": "Destornillador de Precisión",
+      "description": "Ideal para trabajos pequeños",
+      "image": "https://images.pexels.com/photos/292320/pexels-photo-292320.jpeg",
+      "category": "Herramientas"
+    },
+    {
+      "id": 7,
+      "name": "Martillo de Clavos",
+      "description": "Mango ergonómico y resistente",
+      "image": "https://images.pexels.com/photos/209235/pexels-photo-209235.jpeg",
+      "category": "Herramientas"
+    },
+    {
+      "id": 8,
+      "name": "Bombilla LED E27",
+      "description": "Bajo consumo y alta luminosidad",
+      "image": "https://images.pexels.com/photos/110857/pexels-photo-110857.jpeg",
+      "category": "Iluminación"
+    },
+    {
+      "id": 9,
+      "name": "Enchufe Eléctrico",
+      "description": "Toma de corriente estándar",
+      "image": "https://images.pexels.com/photos/21263/pexels-photo.jpg",
+      "category": "Accesorios"
+    },
+    {
+      "id": 10,
+      "name": "Cinta Aislante",
+      "description": "Protección para cables eléctricos",
+      "image": "https://images.pexels.com/photos/416438/pexels-photo-416438.jpeg",
+      "category": "Accesorios"
+    },
+    {
+      "id": 11,
+      "name": "Pinza Alicate",
+      "description": "Corta y sujeta con precisión",
+      "image": "https://images.pexels.com/photos/209422/pexels-photo-209422.jpeg",
+      "category": "Herramientas"
+    },
+    {
+      "id": 12,
+      "name": "Regleta Eléctrica",
+      "description": "Multiplicador de enchufes seguro",
+      "image": "https://images.pexels.com/photos/256390/pexels-photo-256390.jpeg",
+      "category": "Accesorios"
+    },
+    {
+      "id": 13,
+      "name": "Cable USB",
+      "description": "Transferencia de datos y carga",
+      "image": "https://images.pexels.com/photos/50711/pexels-photo-50711.jpeg",
+      "category": "Cables"
     }
-  ]
+  ],
+
+  "COMANDO DB": "json-server --watch db.json --port 5000"
+  
 }

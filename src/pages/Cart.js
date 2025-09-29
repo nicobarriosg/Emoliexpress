@@ -11,41 +11,23 @@ export default function Cart({ cart, setCart }) {
   const [errors, setErrors] = useState({});
 
   const removeItem = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    setCart(updatedCart);
-  };
-
-  const changeQuantity = (id, value) => {
-    let quantity = parseInt(value);
-    if (isNaN(quantity) || quantity < 1) quantity = 1;
-    const updatedCart = cart.map((item) =>
-      item.id === id ? { ...item, quantity } : item
-    );
-    setCart(updatedCart);
+    setCart(cart.filter((item) => item.id !== id));
   };
 
   const handleBuyerChange = (e) => {
     const { name, value } = e.target;
     setBuyer((prev) => ({ ...prev, [name]: value }));
-
-    // limpiar error si empieza a escribir
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const isValidEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const validateForm = () => {
-    let newErrors = {};
+    const newErrors = {};
     if (!buyer.name) newErrors.name = "El nombre es obligatorio.";
     if (!buyer.phone) newErrors.phone = "El teléfono es obligatorio.";
-    if (!buyer.email) {
-      newErrors.email = "El correo es obligatorio.";
-    } else if (!isValidEmail(buyer.email)) {
-      newErrors.email = "Por favor ingresa un correo válido.";
-    }
+    if (!buyer.email) newErrors.email = "El correo es obligatorio.";
+    else if (!isValidEmail(buyer.email)) newErrors.email = "Por favor ingresa un correo válido.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -69,11 +51,49 @@ export default function Cart({ cart, setCart }) {
     message += `Correo: ${buyer.email}\n`;
     if (buyer.message) message += `Mensaje: ${buyer.message}\n`;
 
-    const phoneNumber = "569XXXXXXXX"; // 👉 cambia por tu número
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    const phoneNumber = "569XXXXXXXX"; // Cambia por tu número
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
+  };
+
+  // Permitir solo números positivos
+  const changeQuantity = (id, value) => {
+    // Eliminar todo lo que no sea dígito
+    const sanitized = value.replace(/\D/g, "");
+    setCart((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity: sanitized } : item))
+    );
+  };
+
+  const normalizeQuantity = (id) => {
+    setCart((prev) =>
+      prev.map((item) => {
+        let qty = parseInt(item.quantity, 10);
+        if (isNaN(qty) || qty < 1) qty = 1;
+        return { ...item, quantity: qty };
+      })
+    );
+  };
+
+  const incrementQuantity = (id) => {
+    setCart((prev) =>
+      prev.map((item) => ({
+        ...item,
+        quantity: item.id === id ? (parseInt(item.quantity, 10) || 1) + 1 : item.quantity,
+      }))
+    );
+  };
+
+  const decrementQuantity = (id) => {
+    setCart((prev) =>
+      prev.map((item) => ({
+        ...item,
+        quantity:
+          item.id === id
+            ? Math.max((parseInt(item.quantity, 10) || 1) - 1, 1)
+            : item.quantity,
+      }))
+    );
   };
 
   return (
@@ -96,12 +116,28 @@ export default function Cart({ cart, setCart }) {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>
-                  <input
-                    type="number"
-                    min="1"
-                    value={item.quantity || 1}
-                    onChange={(e) => changeQuantity(item.id, e.target.value)}
-                  />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <button type="button" onClick={() => decrementQuantity(item.id)}>
+                      -
+                    </button>
+                    <input
+                      type="text"
+                      value={item.quantity}
+                      onChange={(e) => changeQuantity(item.id, e.target.value)}
+                      onBlur={() => normalizeQuantity(item.id)}
+                      style={{ width: "50px", textAlign: "center" }}
+                    />
+                    <button type="button" onClick={() => incrementQuantity(item.id)}>
+                      +
+                    </button>
+                  </div>
                 </td>
                 <td>
                   <button onClick={() => removeItem(item.id)}>X</button>
@@ -114,54 +150,35 @@ export default function Cart({ cart, setCart }) {
 
       <h3>Datos del comprador</h3>
       <form className="buyer-form">
-  <div>
-    <label>
-      Nombre <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      value={buyer.name}
-      onChange={(e) => setBuyer({ ...buyer, name: e.target.value })}
-      required
-    />
-  </div>
+        <div>
+          <label>
+            Nombre <span className="required">*</span>
+          </label>
+          <input type="text" name="name" value={buyer.name} onChange={handleBuyerChange} required />
+        </div>
 
-  <div>
-    <label>
-      Número <span className="required">*</span>
-    </label>
-    <input
-      type="text"
-      value={buyer.phone}
-      onChange={(e) => setBuyer({ ...buyer, phone: e.target.value })}
-      required
-    />
-  </div>
+        <div>
+          <label>
+            Número <span className="required">*</span>
+          </label>
+          <input type="text" name="phone" value={buyer.phone} onChange={handleBuyerChange} required />
+        </div>
 
-  <div>
-    <label>
-      Correo <span className="required">*</span>
-    </label>
-    <input
-      type="email"
-      value={buyer.email}
-      onChange={(e) => setBuyer({ ...buyer, email: e.target.value })}
-      required
-    />
-    {!/\S+@\S+\.\S+/.test(buyer.email) && buyer.email.length > 0 && (
-      <p className="error-message">Por favor ingresa un correo válido.</p>
-    )}
-  </div>
+        <div>
+          <label>
+            Correo <span className="required">*</span>
+          </label>
+          <input type="email" name="email" value={buyer.email} onChange={handleBuyerChange} required />
+          {!/\S+@\S+\.\S+/.test(buyer.email) && buyer.email.length > 0 && (
+            <p className="error-message">Por favor ingresa un correo válido.</p>
+          )}
+        </div>
 
-  <div>
-    <label>Mensaje extra</label>
-    <textarea
-      value={buyer.message}
-      onChange={(e) => setBuyer({ ...buyer, message: e.target.value })}
-    />
-  </div>
-</form>
-
+        <div>
+          <label>Mensaje extra</label>
+          <textarea name="message" value={buyer.message} onChange={handleBuyerChange} />
+        </div>
+      </form>
 
       <button className="whatsapp-btn" onClick={handleWhatsApp}>
         Cotizar por WhatsApp
